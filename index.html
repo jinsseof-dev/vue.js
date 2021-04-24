@@ -7,13 +7,8 @@
   </head>
   <body>
     <div id="app">
-      <a v-if="flag">v-if Doit Vue.js. donot show this tag</a>
-      <ul>
-        <li v-for="system in systems">{{ system }}</li>
-      </ul>
-      <p v-show="flag">v-show Doit Vue.js. show this tag and edit display style</p>
-      <h5 v-bind:id="uid">뷰 입문서. 인정은 하는데 Vuejs.org 봐도 될듯</h5>
-      <button v-on:click="popupAlert">Alert button</button>
+      <button v-on:click="ClickBtn(10, 20)">ClickBtn(10, 20)</button>
+      <button v-on:click="ClickBtn1">ClickBtn1</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -21,14 +16,12 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>             <!-- axios library for Ajax request -->
     <script>
       new Vue({
-        data: {
-          flag: true,
-          systems: ['android', 'ios', 'windows'],
-          uid: 10
-        },
         methods: {
-          popupAlert: function() {
-            return alert('this is Alert');
+          ClickBtn: function(num, num1) {
+            return alert('num : '+num + ', num1 : '+num1);
+          },
+          ClickBtn1: function(event) {
+            console.log(event);
           }
         }
       }).$mount('#app'); // el: '#app'과 동일하게 Instance를 HTML에 부착. 실제 개발시 el이 아닌 $mount()를 사용한다
