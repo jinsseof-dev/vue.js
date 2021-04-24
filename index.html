@@ -7,13 +7,12 @@
   </head>
   <body>
     <div id="app">
-      <h1>Vue Router Example</h1>
-      <p>
-        <router-link to="/main">Redirect to Main Component</router-link>
-      </p>
-      <p>
-        <router-link to="/login">Redirect to Login Component</router-link>
-      </p>
+      <h1>Vue Nested Router Example</h1>
+      <p><router-link to="/main">Redirect to Main Component</router-link></p>
+      <p><router-link to="/login">Redirect to Login Component</router-link></p>
+      <p><router-link to="/user">Redirect to User Component</router-link></p>
+      <p><router-link to="/user/posts">Redirect to User/Posts Component</router-link></p>
+      <p><router-link to="/user/profile">Redirect to User/Profile Component</router-link></p>
       <router-view></router-view> <!-- Router-link to에서 정의한 URL에 따라 갱신될 화면 영역 -->
     </div>
 
@@ -22,11 +21,22 @@
     <script>
       var Main = { template: '<div>main</div>'};   // Main component에 사용될 template 정의
       var Login = { template: '<div>login</div>'}; // Login component에 사용될 template 정의
+      var User = {
+        template: `<div>User Component<router-view></router-view></div>`
+      };
+      var UserProfile = { template: '<p>User Profile Component</p>'};
+      var UserPost = { template: '<p>User Post Component</p>'};
 
       // path값에 따라 표시할 component를 정의
       var routes = [
-        { path: '/main', component: Main }, 
-        { path: '/login', component: Login }
+        { path: '', component: Main },
+        { path: '/main', component: Main },
+        { path: '/login', component: Login },
+        { path: '/user', component: User, children: [
+            { path: 'posts', component: UserPost },
+            { path: 'profile', component: UserProfile },
+          ]
+        }
       ];
 
       // VueRouter Instance를 생성하고 rouets를 삽입
