@@ -7,12 +7,13 @@
   </head>
   <body>
     <div id="app">
-      <p v-bind:id="idA">v-bind:id - id binding</p>
-      <p v-bind:class="classA">v-bind:class - class binding</p>
-      <p v-bind:style="styleA">v-bind:style - style binding</p>
-      <p :id="idA">:id - id short binding(not recommanded)</p>
-      <p :class="classA">:class - class short binding(not recommanded)</p>
-      <p :style="styleA">:style - style short binding(not recommanded)</p>
+      <a v-if="flag">v-if Doit Vue.js. donot show this tag</a>
+      <ul>
+        <li v-for="system in systems">{{ system }}</li>
+      </ul>
+      <p v-show="flag">v-show Doit Vue.js. show this tag and edit display style</p>
+      <h5 v-bind:id="uid">뷰 입문서. 인정은 하는데 Vuejs.org 봐도 될듯</h5>
+      <button v-on:click="popupAlert">Alert button</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -21,9 +22,14 @@
     <script>
       new Vue({
         data: {
-          idA: 10,
-          classA: 'container',
-          styleA: 'color: blue'
+          flag: true,
+          systems: ['android', 'ios', 'windows'],
+          uid: 10
+        },
+        methods: {
+          popupAlert: function() {
+            return alert('this is Alert');
+          }
         }
       }).$mount('#app'); // el: '#app'과 동일하게 Instance를 HTML에 부착. 실제 개발시 el이 아닌 $mount()를 사용한다
     </script>
