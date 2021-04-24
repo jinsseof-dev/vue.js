@@ -1,34 +1,44 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Vue Instance Lifecycle</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Router Sample</title>
   </head>
   <body>
     <div id="app">
-      <child-component></child-component>
+      <h1>Vue Router Example</h1>
+      <p>
+        <router-link to="/main">Redirect to Main Component</router-link>
+      </p>
+      <p>
+        <router-link to="/login">Redirect to Login Component</router-link>
+      </p>
+      <router-view></router-view> <!-- Router-link to에서 정의한 URL에 따라 갱신될 화면 영역 -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script> <!-- vue-router library for Vue Routing -->
     <script>
+      var Main = { template: '<div>main</div>'};   // Main component에 사용될 template 정의
+      var Login = { template: '<div>login</div>'}; // Login component에 사용될 template 정의
 
-      var eventBus = new Vue();
-      Vue.component('child-component', {
-        template: '<div>하위 컴포넌트 영역입니다.<button v-on:click="showLog">show</button></div>',
-        methods: {
-          showLog: function() {
-            eventBus.$emit('triggerEventBus', 100);
-          }
-        }
+      // path값에 따라 표시할 component를 정의
+      var routes = [
+        { path: '/main', component: Main }, 
+        { path: '/login', component: Login }
+      ];
+
+      // VueRouter Instance를 생성하고 rouets를 삽입
+      var router = new VueRouter({
+        mode: 'history', // Vue Router는 기본 형식으로 URI 앞에 #을 붙임. #을 없애려면 history 모드 사용
+        routes
       });
 
+      // Vue Instance를 생성하고 router를 추가
       var app = new Vue({
-        el: '#app',
-        created: function() {
-          eventBus.$on('triggerEventBus', function(value) {
-            console.log("이벤트 전달받음. 전달받은 값 : ", value);
-          });
-        }
-      });
+        router
+      }).$mount('#app'); // el: '#app'과 동일하게 Instance를 HTML에 부착. 실제 개발시 el이 아닌 $mount()를 사용한다
     </script>
   </body>
 </html>
