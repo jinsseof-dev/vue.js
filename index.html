@@ -4,32 +4,29 @@
   </head>
   <body>
     <div id="app">
-      <!-- 하위 component의 show-log 이벤트를 지정하며, 이 때 호출될 상위 component의 printText 메서드를 지정 -->
-      <child-component v-on:show-log="printText"></child-component>
+      <child-component></child-component>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script>
+
+      var eventBus = new Vue();
       Vue.component('child-component', {
-        template: '<button v-on:click="showLog">show</button>',
-          methods: {
-            showLog: function() {
-              this.$emit('show-log');
-            }
+        template: '<div>하위 컴포넌트 영역입니다.<button v-on:click="showLog">show</button></div>',
+        methods: {
+          showLog: function() {
+            eventBus.$emit('triggerEventBus', 100);
           }
+        }
       });
 
-      new Vue({
+      var app = new Vue({
         el: '#app',
-        data: {
-          message: 'Hello Vue! passed from Parent Component',
-          message1: 'Hello Vue! passed from Parent Component1'
-        },
-        methods: {
-          printText: function() {
-            console.log("received an event");
-          }
+        created: function() {
+          eventBus.$on('triggerEventBus', function(value) {
+            console.log("이벤트 전달받음. 전달받은 값 : ", value);
+          });
         }
       });
     </script>
