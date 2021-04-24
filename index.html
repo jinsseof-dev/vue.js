@@ -4,25 +4,44 @@
   </head>
   <body>
     <div id="app">
-      <button>컴포넌트 등록</button>
-      <my-local-component></my-local-component> <!-- 지역 컴포넌트 표시 -->
+      <h3>첫 번째 인스턴스 영역</h3>
+      <my-global-component></my-global-component> <!-- 전역 컴포넌트 표시 -->
+      <my-local-component></my-local-component>   <!-- 지역 컴포넌트 표시 -->
+    </div>
+    <hr>
+    <div id="app1">
+      <h3>두 번째 인스턴스 영역</h3>
+      <my-global-component></my-global-component> <!-- 전역 컴포넌트 표시 -->
+      <my-local-component></my-local-component>   <!-- 지역 컴포넌트 표시 -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <!-- 지역 컴포넌트 등록
-    my-local-component tag가 template의 값으로 치환됨
-    -->
     <script>
+      // 전역 컴포넌트 등록
+      Vue.component('my-global-component', {
+        template: '<div>전역 컴포넌트입니다.</div>'
+      });
+
+      // 지역 컴포넌트 내용
       var cmp = {
         // 컴포넌트 내용
-        template: '<div>지역 컴포넌트가 등록되었습니다.</div>'
+        template: '<div>지역 컴포넌트입니다.</div>'
       };
     </script>
 
     <script>
       new Vue({
         el: '#app',
+        // 지역 컴포넌트 등록
+        components: {
+          'my-local-component': cmp
+        }
+      });
+
+      new Vue({
+        el: '#app1',
+        // 지역 컴포넌트 등록
         components: {
           'my-local-component': cmp
         }
