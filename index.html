@@ -4,28 +4,32 @@
   </head>
   <body>
     <div id="app">
-      <!--
-        child-component 추가. v-bind attribute 추가.
-        상위 component의 message attribute의 값을 하위 component(child-component)의 propsdata로 전달
-      -->
-      <child-component v-bind:propsdata="message"></child-component>
-      <child-component v-bind:propsdata="message1"></child-component>
+      <!-- 하위 component의 show-log 이벤트를 지정하며, 이 때 호출될 상위 component의 printText 메서드를 지정 -->
+      <child-component v-on:show-log="printText"></child-component>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script>
-      Vue.component('child-component', {   // Vue 변수에 child-component를 등록
-        props: ['propsdata'],              // child-component의 props attribute를 추가, 값으로 propsdata를 정의
-        template: '<p>{{ propsdata }}</p>' // child-component의 template attribute에 정의된 '<p>{{ propsdata }}</p'는 'Hello Vue! passed from Parent Component'가 됨
+      Vue.component('child-component', {
+        template: '<button v-on:click="showLog">show</button>',
+          methods: {
+            showLog: function() {
+              this.$emit('show-log');
+            }
+          }
       });
 
-      // Create Vue Instance
       new Vue({
         el: '#app',
         data: {
           message: 'Hello Vue! passed from Parent Component',
           message1: 'Hello Vue! passed from Parent Component1'
+        },
+        methods: {
+          printText: function() {
+            console.log("received an event");
+          }
         }
       });
     </script>
