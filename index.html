@@ -4,34 +4,24 @@
   </head>
   <body>
     <div id="app">
-      {{ message }}
+      <button>컴포넌트 등록</button>
+      <my-component></my-component> <!-- 전역 컴포넌트 표시 -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- 전역 컴포넌트 등록
+    my-component tag가 template의 값으로 치환됨
+    -->
+    <script>
+      Vue.component('my-component', {
+        template: '<div>전역 컴포넌트가 등록되었습니다.</div>' 
+      });
+    </script>
+
     <script>
       new Vue({
-        el: '#app',
-        data: {
-          message: 'Hello Vue.js!'
-        },
-        beforeCreate: function() {
-          console.log("beforeCreate");
-        },
-        created: function() {
-          console.log("created");
-        },
-        mounted: function() {
-          console.log("origin message is "+this.message);
-          console.log("mounted");
-          this.message = 'Hello Vue!';
-          console.log("message changed to "+this.message);
-        },
-        beforeUpdate: function() {
-          console.log("beforeUpdate");
-        },
-        updated: function() {
-          console.log("updated");
-        }
+        el: '#app'
       });
     </script>
   </body>
