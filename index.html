@@ -1,29 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue Router Sample</title>
+    <title>vue.js</title>
   </head>
   <body>
-    <div id="app">
-      <input v-model="message">
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script> <!-- vue-router library for Vue Routing -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>             <!-- axios library for Ajax request -->
-    <script>
-      new Vue({
-        data: {
-          message: 'Hello Vue.js!'
-        },
-        watch: {
-          message: function(data) {
-            console.log("message is changed : ", data);
-          }
-        }
-      }).$mount('#app'); // el: '#app'과 동일하게 Instance를 HTML에 부착. 실제 개발시 el이 아닌 $mount()를 사용한다
-    </script>
+    <div id="app"></div>
+    <script src="/dist/build.js"></script>
   </body>
 </html>
