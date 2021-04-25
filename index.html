@@ -7,8 +7,9 @@
   </head>
   <body>
     <div id="app">
-      <button v-on:click="ClickBtn(10, 20)">ClickBtn(10, 20)</button>
-      <button v-on:click="ClickBtn1">ClickBtn1</button>
+      <p>{{ message }}</p>
+      <button v-on:click="methodreverseMsg">Reverse String method</button>
+      <p>{{ computedreversedMessage }}</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -16,12 +17,18 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>             <!-- axios library for Ajax request -->
     <script>
       new Vue({
+        data: {
+          message: 'Hello Vue.js!'
+        },
         methods: {
-          ClickBtn: function(num, num1) {
-            return alert('num : '+num + ', num1 : '+num1);
-          },
-          ClickBtn1: function(event) {
-            console.log(event);
+          methodreverseMsg: function() {
+            this.message = this.message.split('').reverse().join('');
+            return this.message;
+          }
+        },
+        computed: {
+          computedreversedMessage: function() {
+            return this.message.split('').reverse().join('');
           }
         }
       }).$mount('#app'); // el: '#app'과 동일하게 Instance를 HTML에 부착. 실제 개발시 el이 아닌 $mount()를 사용한다
