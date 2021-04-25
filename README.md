@@ -1,6 +1,6 @@
-# vue.js
+# vue-todo
 
-> study for vue.js
+> vue-todo app
 
 ## Build Setup
 

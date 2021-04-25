@@ -1,6 +1,6 @@
 {
-  "name": "vue.js",
-  "description": "study for vue.js",
+  "name": "vue-todo",
+  "description": "vue-todo app",
   "version": "1.0.0",
   "author": "jinsseof1 <jinsseof@gmail.com>",
   "license": "MIT",
